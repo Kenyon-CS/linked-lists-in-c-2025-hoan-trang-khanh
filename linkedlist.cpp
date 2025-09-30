@@ -92,19 +92,72 @@ class LinkedList {
         delete temp;
     }
 
+    // Function to get the last element and remove it from the list
+    void last () {
+        if (head == nullptr) {
+            std::cout << "List is empty." << std::endl;
+            return;
+        }
+        if (head->next == nullptr) {
+            std::cout << "Last element: " << head->data << std::endl;
+            delete head;
+            head = nullptr;
+            return;
+        }
+        node<T>* temp = head;
+        while (temp->next->next != nullptr) {
+            temp = temp->next;
+        }
+        std::cout << "Last element: " << temp->next->data << std::endl;
+        delete temp->next;
+        temp->next = nullptr;
+    }
+
+    // Insert in sorted order (ascending)
+    void addOrder(T value) {
+        node<T>* newNode = new node<T>(value);
+
+        // Case 1: empty list OR new node goes before head
+        if (head == nullptr || value < head->data) {
+            newNode->next = head;
+            head = newNode;
+            return;
+        }
+
+        // Case 2: find position in middle or end
+        node<T>* temp = head;
+        while (temp->next != nullptr && temp->next->data < value) {
+            temp = temp->next;
+        }
+
+        // Insert newNode between temp and temp->next
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+};
+
 int main() {
     LinkedList<int> list;
 
-    list.append(1);
-    list.append(2);
-    list.append(3);
-    list.prepend(0);
+    list.addOrder(6);
+    list.addOrder(1);
+    list.addOrder(7);
+    list.addOrder(3);
+    list.addOrder(4);
 
-    std::cout << "Linked List: ";
+    std::cout << "Linked List (sorted insertion): ";
     list.print();
 
-    list.remove(2);
-    std::cout << "After removing 2: ";
+    list.lfirst();
+    std::cout << "After lfirst: ";
+    list.print();
+
+    list.last();
+    std::cout << "After last: ";
+    list.print();
+
+    list.addOrder(5);
+    std::cout << "After adding 5 in order: ";
     list.print();
 
     return 0;
