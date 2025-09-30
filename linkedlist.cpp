@@ -80,7 +80,6 @@ class LinkedList {
         }
     }
 
-    // Function to get the first element and remove it from the list
     void lfirst () {
         if (head == nullptr) {
             std::cout << "List is empty." << std::endl;
@@ -92,7 +91,6 @@ class LinkedList {
         delete temp;
     }
 
-    // Function to get the last element and remove it from the list
     void last () {
         if (head == nullptr) {
             std::cout << "List is empty." << std::endl;
@@ -113,25 +111,19 @@ class LinkedList {
         temp->next = nullptr;
     }
 
-    // Insert in sorted order (ascending)
     void addOrder(T value) {
         node<T>* newNode = new node<T>(value);
 
-        // Case 1: empty list OR new node goes before head
         if (head == nullptr || value < head->data) {
             newNode->next = head;
             head = newNode;
             return;
         }
 
-        // Case 2: find position in middle or end
         node<T>* temp = head;
         while (temp->next != nullptr && temp->next->data < value) {
             temp = temp->next;
-        }
-
-        // Insert newNode between temp and temp->next
-        newNode->next = temp->next;
+        }        newNode->next = temp->next;
         temp->next = newNode;
     }
 };
