@@ -79,14 +79,18 @@ class LinkedList {
             delete temp;
         }
     }
+
+    // Function to get the first element and remove it from the list
     void lfirst () {
-        if (head != nullptr) {
-            std::cout << "First element: " << head->data << std::endl;
-        } else {
+        if (head == nullptr) {
             std::cout << "List is empty." << std::endl;
+            return;
         }
+        node<T>* temp = head;
+        head = head->next;
+        std::cout << "First element: " << temp->data << std::endl;
+        delete temp;
     }
-};
 
 int main() {
     LinkedList<int> list;
