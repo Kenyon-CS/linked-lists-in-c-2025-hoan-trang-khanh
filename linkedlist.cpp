@@ -79,6 +79,13 @@ class LinkedList {
             delete temp;
         }
     }
+    void lfirst () {
+        if (head != nullptr) {
+            std::cout << "First element: " << head->data << std::endl;
+        } else {
+            std::cout << "List is empty." << std::endl;
+        }
+    }
 };
 
 int main() {
